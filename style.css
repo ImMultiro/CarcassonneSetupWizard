@@ -41,6 +41,10 @@ details {
     #main {
         width: 100%;
     }
+
+    #generated {
+        font-size: 3rem;
+    }
 }
 
 #logo {
