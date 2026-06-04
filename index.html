@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Carcassonne Setup Wizard</title>
+
+    <script src="script.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <template id="expansion-temp">
+        <label class="expansion-label"><input class="expansion" type="checkbox">NAME</label>
+        <br>
+    </template>
+
+    <template id="comp-temp">
+        <details style="background-color: #e2e8a2;">
+            <summary>Components</summary>
+            <p>You will need the following components:</p>
+            <ul id="general"></ul>
+            <p>You will need the following land tiles:</p>
+            <ul id="tiles"></ul>
+            <p>Each player gets:</p>
+            <ul id="player"></ul>
+        </details>
+    </template>
+
+    <div id="main">
+
+        <h1>Carcassonne Setup Wizard</h1>
+
+        <div id="expansions"></div>
+
+        <br>
+        <button id="generate" onclick="generate()">Generate!</button>
+
+        <div id="generated"></div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+@font-face {
+    font-family: Barbedor;
+    src: url("Barbedor Regular/Barbedor Regular.ttf");
+}
+
+body {
+    font-family: Barbedor, cursive;
+    display: flex;
+    justify-content: center;
+}
+
+details {
+    border: #6e582f solid 5px;
+    padding: 3px;
+}
+
+#main {
+    width: 25%;
+}
+
+#generate {
+    background-color: #a1e110;
+    width: 100%;
+    aspect-ratio: 6/1;
+    border: none;
+    border-radius: 5px;
+}
+
+#generate:hover {
+    filter: brightness(90%);
+}
+
+#generate:active {
+    filter: brightness(75%);
+}
