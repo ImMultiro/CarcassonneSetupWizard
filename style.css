@@ -20,6 +20,29 @@ details {
     flex-direction: column;
 }
 
+.expansion-label {
+    display: grid;
+    grid-template-columns: 2em auto;
+}
+
+@media (max-width: 1000px) {
+    body {
+        font-size: 200%;
+    }
+
+    .expansion-label, #generate {
+        font-size: 150%;
+    }
+
+    .expansion {
+        transform: scale(150%);
+    }
+
+    #main {
+        width: 100%;
+    }
+}
+
 #logo {
     width: 25%;
     align-self: center;
