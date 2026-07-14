@@ -16,16 +16,16 @@
 
 <body>
 
-    <template id="expansion-temp">
-        <label class="expansion-label"><input class="expansion" type="checkbox">NAME</label>
+    <template id="expansion-t">
+        <label class="expansion-label"><input class="expansion-checkbox" type="checkbox">NAME</label>
         <br>
     </template>
 
-    <template id="comp-temp">
+    <template id="components-t">
         <details style="background-color: #e2e8a2;">
             <summary>Land tiles</summary>
             <p><b>You will need the following land tiles:</b></p>
-            <ul id="tiles"></ul>
+            <ul data-category="tiles"></ul>
         </details>
 
         <br>
@@ -33,7 +33,7 @@
         <details style="background-color: #e2f5fc">
             <summary>Player components</summary>
             <p><b>Each player gets:</b></p>
-            <ul id="player"></ul>
+            <ul data-category="player"></ul>
         </details>
 
         <br>
@@ -41,7 +41,7 @@
         <details style="background-color: #facdb8">
             <summary>Other components</summary>
             <p><b>You will also need the following components:</b></p>
-            <ul id="general"></ul>
+            <ul data-category="general"></ul>
         </details>
     </template>
 

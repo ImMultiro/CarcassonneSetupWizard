@@ -2,150 +2,269 @@ let expansions = [
     {
         name: "The River",
         components: {
-            tiles: "17 \"The River\" land tiles"
-        }
+            tiles: 17
+        },
+        playTime: 0
     },
     {
         name: "The Abbot",
         components: {
-            player: ["1 abbot"]
-        }
+            player: [
+                {
+                    number: 1,
+                    name: "Abbot"
+                }
+            ]
+        },
+        playTime: 0
     },
     {
         name: "Inns & Cathedrals",
         components: {
-            tiles: "18 \"Inns & Cathedrals\" land tiles",
-            player: ["1 large meeple"]
-        }
+            tiles: 18,
+            player: [
+                {
+                    number: 1,
+                    name: "Large meeple"
+                }
+            ]
+        },
+        playTime: 15
     },
     {
         name: "Traders & Builders",
         components: {
-            tiles: "24 \"Traders & Builders\" land tiles",
-            general: ["20 goods tokens (9x Wine, 6x Corn and 5x Cloth)"],
-            player: ["1 builder", "1 pig"]
-        }
+            tiles: 24,
+            general: [
+                {
+                    number: 20,
+                    name: "Goods token"
+                }
+            ],
+            player: [
+                {
+                    number: 1,
+                    name: "Builder"
+                },
+                {
+                    number: 1,
+                    name: "Pig"
+                }
+            ]
+        },
+        playTime: 15
     },
     {
         name: "The Flying Machines",
         components: {
-            tiles: "8 \"The Flying Machines\" land tiles",
-            general: ["1 flight die"]
-        }
+            tiles: 8,
+            general: [
+                {
+                    number: 1,
+                    name: "Flight die"
+                }
+            ]
+        },
+        playTime: 10
     },
     {
         name: "The Messengers",
         components: {
-            general: ["8 message tiles"],
-            player: ["1 messenger"]
-        }
+            general: [
+                {
+                    number: 8,
+                    name: "Message tile"
+                }
+            ],
+            player: [
+                {
+                    number: 1,
+                    name: "Mesenger"
+                }
+            ]
+        },
+        playTime: 15
     },
     {
         name: "The Ferries",
         components: {
-            general: ["8 ferries"],
-            tiles: "8 \"The Ferries\" land tiles"
-        }
+            general: [
+                {
+                    number: 8,
+                    name: "Ferry"
+                }
+            ],
+            tiles: 8
+        },
+        playTime: 15
     },
     {
         name: "The Gold Mines",
         components: {
-            general: ["1 \"The Gold Mines\" scoring token", "8 gold ingots"],
-            tiles: "8 \"The Gold Mines\" land tiles"
-        }
+            general: [
+                {
+                    number: 1,
+                    name: "\"The Gold Mines\" scoring token"
+                }
+            ],
+            tiles: 8
+        },
+        playTime: 10
     },
     {
         name: "Mage & Witch",
         components: {
-            general: ["1 mage figure", "1 witch figure"],
-            tiles: "8 \"Magician & Witch\" land tiles"
-        }
+            general: [
+                {
+                    number: 1,
+                    name: "Mage figure"
+                },
+                {
+                    number: 1,
+                    name: "Witch figure"
+                }
+            ],
+            tiles: 8
+        },
+        playTime: 10
     },
     {
         name: "The Robbers",
         components: {
-            tiles: "8 \"The Robbers\" land tiles",
-            player: ["1 robber figure"]
-        }
+            tiles: 8,
+            player: [
+                {
+                    number: 1,
+                    name: "Robber figure"
+                }
+            ]
+        },
+        playTime: 10
     },
     {
         name: "The Crop Circles",
         components: {
-            tiles: "6 \"The Crop Circles\" land tiles"
-        }
+            tiles: 6
+        },
+        playTime: 10
     }
 ];
 
-window.onload = function () {
-    let temp = document.getElementById('expansion-temp');
-    let expDiv = document.getElementById('expansions')
+window.onload = function (){
+    let temp = document.getElementById('expansion-t');
+    let expDiv = document.getElementById('expansions');
 
-    for (let i in expansions) {
+    for (let i of expansions) {
         let clone = temp.content.cloneNode(true);
         let label = clone.childNodes[1];
-        label.innerHTML = label.innerHTML.replace("NAME", expansions[i].name);
+        label.innerHTML = label.innerHTML.replace("NAME", i.name);
         expDiv.appendChild(clone);
     }
 }
 
 function generate() {
-    let generated = document.getElementById("generated");
-    generated.innerHTML = '';
+    let generatedDiv = document.getElementById('generated');
+    let expansionsDiv = document.getElementById('expansions');
+    let componentsTemplate = document.getElementById('components-t');
 
-    let exps = document.getElementById("expansions").children;
-    let active = [];
+    generatedDiv.innerHTML = '';
 
-    for (let exp of exps) {
-        let checkbox = exp.children[0];
-        if (exp.tagName !== 'LABEL') continue;
-        if (checkbox.checked) active.push(expansions.find((obj) => obj.name === exp.innerText));
+    let activeExpansions = [{
+        name: "Carcassonne",
+        components: {
+            tiles: 84,
+            player: [
+                {
+                    number: 8,
+                    name: "Meeple"
+                }
+            ],
+            general: [
+                {
+                    number: 1,
+                    name: "Scoreboard"
+                },
+                {
+                    number: 8,
+                    name: "Points tile"
+                }
+            ]
+        },
+        playTime: 35
+    }];
+
+    for (let expansion of expansionsDiv.getElementsByTagName('label')) {
+        let checkbox = expansion.querySelector('.expansion-checkbox');
+        if (checkbox.checked) activeExpansions.push(expansions.find((obj) => obj.name === expansion.innerText));
     }
 
-    // Components
     let components = {
-        general: [],
+        tiles: [],
         player: [],
-        tiles: []
+        general: []
     };
-    for (let i of active) {
-        for (let j in components) {
-            if (i.components[j] === undefined) continue;
-            components[j] = components[j].concat(i.components[j]);
+
+    for (let key in components) {
+        console.log(key);
+        for (let expansion of activeExpansions) {
+            console.log(expansion);
+            if (expansion.components[key] === undefined) continue;
+            components[key] = components[key].concat(window["generate_" + key](expansion));
         }
     }
 
-    let temp = document.getElementById("comp-temp");
+    let playTime = 0;
+    for (let i of activeExpansions) {
+        playTime += i.playTime;
+    }
 
-    let clone = temp.content.cloneNode(true);
-    for (let i of clone.querySelectorAll("ul")) {
-        let currentComponents = components[i.id];
-        for (let j of currentComponents) {
+    let playTimeP = document.createElement('p');
+    playTimeP.innerHTML = "<b>Estimated play time:</b> " + String(playTime) + " Min";
+    generatedDiv.appendChild(playTimeP);
+
+    let clone = componentsTemplate.content.cloneNode(true);
+
+    for (let ul of clone.querySelectorAll("ul")) {
+        let currentComponents = components[ul.dataset.category];
+        for (let i of currentComponents) {
             let li = document.createElement('li');
-            li.innerHTML = j;
-            i.appendChild(li);
+            li.innerHTML = i;
+            ul.appendChild(li);
         }
     }
 
-    generated.appendChild(clone);
+    generatedDiv.appendChild(clone);
+}
 
-    /*
-    // Pieces
-    let pieces = [];
-    for (let expansion of active) {
-        pieces = [...pieces, ...expansion.pieces];
+function generate_tiles(expansion) {
+    let number = expansion.components.tiles;
+    let name = expansion.name;
+
+    return `${number} \"${name}\" land tiles`;
+}
+
+function generate_player(expansion) {
+    let out = [];
+
+    for (let i of expansion.components.player) {
+        let number = i.number;
+        let name = i.name;
+
+        out = out.concat(number + " x " + name);
     }
 
+    return out;
+}
 
-    let temp = document.getElementById("pieces-temp");
+function generate_general(expansion) {
+    let out = [];
 
-    let clone = temp.content.cloneNode(true);
-    let ul = clone.querySelector('ul');
+    for (let i of expansion.components.general) {
+        let number = i.number;
+        let name = i.name;
 
-    for (let i in pieces) {
-        let li = document.createElement('li');
-        li.innerHTML = pieces[i];
-        ul.appendChild(li);
+        out = out.concat(number + " x " + name);
     }
 
-    generated.appendChild(clone);*/
+    return out;
 }
